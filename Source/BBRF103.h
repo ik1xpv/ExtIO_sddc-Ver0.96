@@ -52,7 +52,7 @@ public:
     bool SendI2cbytes(UINT8 i2caddr, UINT8 regaddr, UINT8 * pdata, UINT8 len);
     bool SendI2cbyte(UINT8 i2caddr, UINT8 regaddr, UINT8 data);
     void ReadI2cbytes(UINT8 i2caddr, UINT8 regaddr, UINT8 * pdata, UINT8 len);
-    bool RT820T2alive;
+    bool R820T2isalive;
 private:
     void HouseKeeping();
     int64_t lofreqm[3]; // lo oscillator memory

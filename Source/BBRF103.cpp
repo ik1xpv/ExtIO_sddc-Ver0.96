@@ -37,15 +37,19 @@ bool bbRF103::Init()
     {
         IsOn = true;
         UINT8 rdata[64];
+#ifndef _NO_TUNER_
         fx3Control(TESTFX3,&rdata[0]);
+#else
+        rdata[0] = 1;
+#endif
         if (rdata[0]== 0)
         {
-            RT820T2alive = true;
+            R820T2isalive = true;
             DbgPrintf("RT820T2 found\n");
         }
         else
         {
-            RT820T2alive = false;
+            R820T2isalive = false;
             DbgPrintf("WARNING NO RT820T2\n");
         }
         UpdatemodeRF(modeRF); // blu led Update
@@ -78,7 +82,7 @@ int bbRF103::UpdateattRF(int att)
     if (matt != att)
     {
         matt = att;
-        if ((modeRF == HFMODE) || (modeRF == VLFMODE)|| (RT820T2alive == false))
+        if ((modeRF == HFMODE) || (modeRF == VLFMODE)|| (R820T2isalive == false))
         {
             int dbatt;
             switch (att)
@@ -122,7 +126,7 @@ int bbRF103::UpdateattRF(int att)
 // attenuator RF used in HF dB
 int bbRF103::UpdateattRFdB()
 {
-    if ((modeRF == HFMODE) || (modeRF == VLFMODE) || (RT820T2alive == false))
+    if ((modeRF == HFMODE) || (modeRF == VLFMODE) || (R820T2isalive == false))
     {
         UINT8 tmp = Bgpio &(0xFF ^ (SEL0 ||SEL1));
         switch(attRF)
@@ -174,7 +178,7 @@ void bbRF103::SetLO( int64_t lo, rf_mode mode)
 bool bbRF103::UpdatemodeRF(rf_mode mode)
 {
     bool r = true;
-    if ((mode == VHFMODE) && (!RT820T2alive))
+    if ((mode == VHFMODE) && (!R820T2isalive))
     {
         mode = HFMODE;
     }

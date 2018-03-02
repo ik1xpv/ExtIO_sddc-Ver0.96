@@ -5,7 +5,7 @@
 #ifndef FX3DEV_H
 #define FX3DEV_H
 
-#include "inc\CyAPI.h"
+#include "CyAPI.h"
 
 #define PUINT8 UINT8*
 
@@ -18,7 +18,7 @@ enum FX3Command {
     STARTFX3 = 0xaa,
     STOPFX3 = 0xab,
     TESTFX3 = 0xac,
-    RESETFX3 = 0xcc ,
+    RESETFX3 = 0xcc,
     PAUSEFX3 = 0xdd,
     GPIOFX3 = 0xbc,
     I2CWFX3 = 0xba,

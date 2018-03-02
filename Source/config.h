@@ -19,6 +19,9 @@ inline void null_func(const char *format, ...) { }
   #define DbgPrintf (printf)
 #endif
 
+#define _NO_TUNER_  // R820T2 disabled
+
+
 
 #define VERSION   "ExtIO_sddc.dll ver 0.96"
 
@@ -71,7 +74,7 @@ enum rf_mode {  VLFMODE = 0x0, HFMODE = 0x1, VHFMODE = 0x2 , NOMODE = 3};
 
 #define TIMEOUT (2000)
 
-enum Inject_Signal { ADCstream = 0x0, ToneRF = 0x1, SweepRF = 0x2, ToneIF = 0x3 , SweepIF = 4, Freecase = 5 };
+enum Inject_Signal { ADCstream = 0x0, ToneRF = 0x1, SweepRF = 0x2, ToneIF = 0x3 , SweepIF = 0x4, Freecase = 0x5 };
 extern const char *signal_mode[];
 extern double pi;
 extern double count2usec;

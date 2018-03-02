@@ -221,7 +221,9 @@ int start_AdcSamplesProc(void ) { // pass in the main_loopf thread function
      pthread_create(&adc_samples_thread, NULL, AdcSamplesProc, (void *)t);
     else
     {
-        if (warnflag) inject_tone = ToneIF;
+     //   if (warnflag) inject_tone = ToneIF;
+        if ((inject_tone ==  ADCstream)||(inject_tone ==  ToneRF)||(inject_tone ==  SweepRF))
+            inject_tone = ToneIF;
         pthread_create(&adc_samples_thread, NULL, fake_AdcSamplesProc, (void *)t);
     }
     return 1; // init success
@@ -695,13 +697,13 @@ int64_t EXTIO_API StartHW64(int64_t LOfreq)
     if (BBRF103.IsReady())
     {
         SetWindowText (h_dialog, "BBRF103 connected");
-        if ((glLOfreq < 32000000)||(BBRF103.RT820T2alive == false))
+        if ((glLOfreq < 32000000)||(BBRF103.R820T2isalive == false))
             {    // initialize attenuators
             BBRF103.UpdatemodeRF(HFMODE);
                 SetAttenuator(giAttIdxHF);
             }
         else{
-            if (BBRF103.RT820T2alive == true)
+            if (BBRF103.R820T2isalive == true)
                 {
                     BBRF103.UpdatemodeRF(VHFMODE);
                     SetAttenuator(giAttIdxVHF);
@@ -821,7 +823,7 @@ int64_t EXTIO_API SetHWLO64(int64_t LOfreq)
     rf_mode rfmode = BBRF103.GetmodeRF();
 	if ((LOfreq > 32000000)&&( rfmode == HFMODE))
     {
-        if (BBRF103.RT820T2alive == true)
+        if (BBRF103.R820T2isalive == true)
         {
             BBRF103.UpdatemodeRF(VHFMODE);
             gExtSampleRate = 8000000;
