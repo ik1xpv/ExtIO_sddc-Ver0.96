@@ -34,7 +34,7 @@ BOOL CALLBACK DlgMainFn(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
         case WM_DESTROY:
             DeleteObject(bitmap);
-            UnregisterHotKey(hWnd,IHK_CR);
+//            UnregisterHotKey(hWnd,IHK_CR);
             return TRUE;
 
         case WM_CLOSE:
@@ -64,7 +64,7 @@ BOOL CALLBACK DlgMainFn(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
         case WM_INITDIALOG:
             {
-                RegisterHotKey( hWnd, IHK_CR, 0, 0x0D); // no sound on CR
+         //       RegisterHotKey( hWnd, IHK_CR, 0, 0x0D); // no sound on CR
                 HINSTANCE hInstance = (HINSTANCE)GetWindowLong(hWnd, GWL_HINSTANCE);
                 bitmap = (HBITMAP)::LoadImage(hInstance, MAKEINTRESOURCE(IDB_BITMAP1), IMAGE_BITMAP, 0, 0, 0);
 
